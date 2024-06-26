@@ -18,8 +18,6 @@ const root = document.querySelector(":root");
 const mode = document.querySelector(".mode");
 const mode_img = document.querySelector(".mode-img");
 
-// const navbar_section = document.querySelector(".navbar-section");
-
 const monthes = [
     "January",
     "February",
@@ -34,9 +32,8 @@ const monthes = [
     "November",
     "December",
 ];
-
-
 let dark = false;
+
 convertDark();
 
 dark_light_mode.addEventListener('click', ()=>{
@@ -68,13 +65,12 @@ function convertLight(){
     mode_img.src = "assets/moon.svg"
 }
 
-
-
 search_btn.addEventListener('click', () => {
     let username = input_username.value;
     if (username == "") {
-        alert("Please Enter a valid Username");
-    } else {
+        
+    } 
+    else {
         getUserInfo(username);
     }
 });
@@ -83,7 +79,7 @@ input_username.addEventListener('keydown', (event) => {
     if(event.key === 'Enter'){
         let username = input_username.value;
         if (username == "") {
-            alert("Please Enter a valid Username");
+           
         } 
         else {
             getUserInfo(username);
@@ -92,18 +88,17 @@ input_username.addEventListener('keydown', (event) => {
 });
 
 async function getUserInfo(username) {
-    // API call
     try {
         let response = await fetch(`https://api.github.com/users/${username}`);
         let result = await response.json();
         updateUserDetails(result);
-    } catch (error) {
-        // console.log('username not found');
+    } 
+    catch (error) {
+        console.log('API not Working');
     }
 }
 
 function updateUserDetails(data) {
-    // temp_container.classList.add('active');
     temp_container.classList.add("active");
     user_img.src = data?.avatar_url;
     
@@ -129,7 +124,8 @@ function updateUserDetails(data) {
     let twitter_username = data?.twitter_username;
     if (twitter_username == null) {
         user_twitter.innerText = "not available";
-    } else {
+    } 
+    else {
         user_twitter.href = `https://x.com/${twitter_username}`;
         user_twitter.innerText = twitter_username;
     }
